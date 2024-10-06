@@ -1,11 +1,11 @@
 {
-  "name": "fronend",
+  "name": "frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm i && npm run build ",
+    "build": "vite build", // Ensure this runs the correct Vite build process
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
