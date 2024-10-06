@@ -10,21 +10,7 @@ export default function Planet() {
     const canvasRef = useRef(null);
     const navigate = useNavigate();
     const { name } = useParams();
-    const [hasReloaded, setHasReloaded] = useState(false); // State to track reload
 
-    useEffect(() => {
-        // Reload the page after 0.1 seconds, but only if it hasn't been done yet
-        if (!hasReloaded) {
-            const timer = setTimeout(() => {
-                window.location.reload();
-            }, 100); // 100 milliseconds
-
-            // Set the state to indicate a reload has occurred
-            setHasReloaded(true);
-
-            return () => clearTimeout(timer); // Cleanup the timeout
-        }
-    }, [hasReloaded]);
 
     useEffect(() => {
         const context = canvasRef.current?.getContext('webgl');

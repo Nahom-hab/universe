@@ -41,11 +41,13 @@ import py from '../assets/posY.jpg';
 import ny from '../assets/negY.jpg';
 import pz from '../assets/posZ.jpg';
 import nz from '../assets/negZ.jpg';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const SolarSystem = () => {
     const mountRef = useRef(null);
+    const navigate = useNavigate()
 
     useEffect(() => {
         // Set up renderer, scene, and camera
@@ -267,7 +269,7 @@ const SolarSystem = () => {
                     // Delay navigation by 2 seconds
                     setTimeout(() => {
                         navigate(`/planet/${clickedObject.name}`);
-                    }, 2000);
+                    }, 1000);
                 }
             }
         };
@@ -423,8 +425,13 @@ const SolarSystem = () => {
         // Cleanup on unmount
         return () => {
             window.removeEventListener('resize', handleResize);
-            mountRef.current.removeChild(renderer.domElement);
+
+            // Ensure mountRef.current is not null before removing the child
+            if (mountRef.current && renderer) {
+                mountRef.current.removeChild(renderer.domElement);
+            }
         };
+
     }, []);
 
     return (

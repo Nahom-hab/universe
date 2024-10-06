@@ -266,9 +266,13 @@ const WorldMap = ({
         // Cleanup on unmount
         return () => {
             window.removeEventListener('resize', handleResize);
-            renderer.dispose();
-            mountRef.current.removeChild(renderer.domElement);
+
+            // Ensure mountRef.current is not null before removing the child
+            if (mountRef.current && renderer) {
+                mountRef.current.removeChild(renderer.domElement);
+            }
         };
+
     }, [earthSize, moonCount, rotationalSpeed, earthTexturePath, nightTexturePath, cloudsTexturePath, moonTexturePath, glowcolor, saturnring]);
 
     return <div ref={mountRef} />;
